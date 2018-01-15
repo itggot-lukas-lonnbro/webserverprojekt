@@ -1,10 +1,10 @@
 # webserverprojekt
 
-## Sudoku online
+# Sudoku online
 
 Solve sudokus online or use the solver to solve an existing sudoku in seconds. Login to save your best solving times as well as solved sudokus.
 
-# To-Do
+## To-Do
 
 * Add a sudoku solver
 * Add login system
