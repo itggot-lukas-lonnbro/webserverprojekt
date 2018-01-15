@@ -22,5 +22,5 @@ class App < Sinatra::Base
     puts "we logged in"
     redirect '/'
   end
-
+  
 end
