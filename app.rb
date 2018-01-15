@@ -10,7 +10,16 @@ class App < Sinatra::Base
   end
 
   post '/register' do
-    puts "we did stuff."
+    puts "we registered"
+    redirect '/'
+  end
+
+  get '/login' do
+    slim :login
+  end
+
+  post '/login' do
+    puts "we logged in"
     redirect '/'
   end
 
