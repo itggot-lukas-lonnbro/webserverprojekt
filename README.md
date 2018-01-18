@@ -2,7 +2,7 @@
 
 # Sudoku online
 
-Solve sudokus online or use the solver to solve an existing sudoku in seconds. Login to save your best solving times as well as solved sudokus.
+Solve sudokus online or use the solver to solve an existing sudoku in seconds. Login to save your solved sudokus and watch replays of your earlier solved sudokus.
 
 ## To-Do
 
@@ -10,3 +10,6 @@ Solve sudokus online or use the solver to solve an existing sudoku in seconds. L
 * Add login system
 * Efficiently save solved sudokus as well as the solve time
 * Add a sudoku generator
+
+![alt text][er_diagram]
+[er_diagram]: ./img/er_diagram.jpg "er_diagram"
