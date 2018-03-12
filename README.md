@@ -11,4 +11,6 @@ Solve sudokus online or use the solver to solve an existing sudoku in seconds. L
 * Efficiently save solved sudokus as well as the solve time
 * Add a sudoku generator
 
+## Er diagram
+
 ![Imgur](https://i.imgur.com/ijquPLR.jpg)
