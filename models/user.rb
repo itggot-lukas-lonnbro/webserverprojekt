@@ -1,4 +1,5 @@
 class User < Model
+  table 'Users'
   column_property 'username', String
   column_property 'password', String
   column_property 'role', Integer

@@ -2,6 +2,7 @@ class App < Sinatra::Base
   enable :session
 
   get '/' do
+    pp User.get_all
     slim :home
   end
 
