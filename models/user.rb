@@ -1,8 +1,9 @@
 class User < Model
+  #Has to be declared in the order of columns appearing in
   table 'Users'
   column_property 'username', String, unique: true
   column_property 'password', String
-  column_property 'role', Integer
+  column_property 'role', Integer, default: 0
 
   def initialize(params = nil)
     @password = params[1]

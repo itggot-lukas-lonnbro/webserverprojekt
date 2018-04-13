@@ -2,6 +2,7 @@ class App < Sinatra::Base
   enable :session
 
   get '/' do
+    p User.get_by_role("lukas")
     slim :home
   end
 
@@ -10,7 +11,7 @@ class App < Sinatra::Base
   end
 
   post '/register' do
-    puts "we registered"
+    User.add(params)
     redirect '/'
   end
 
