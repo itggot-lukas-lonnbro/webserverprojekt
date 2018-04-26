@@ -37,7 +37,7 @@ class Model
       return "Failed to parse query"
     else
       db_result = @@db.execute("SELECT * FROM #{@table} WHERE #{column} LIKE ?", query)
-      return db_result[0]
+      return self.new(db_result[0])
     end
   end
 

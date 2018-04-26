@@ -25,6 +25,13 @@ class App < Sinatra::Base
   end
 
   post '/login' do
-    redirect '/'
+    user = User.get_by('username', params['username'])
+    if user.authenticate(params['password'])
+      puts "Authenticated"
+      redirect '/'
+    else
+      puts "error: unable to authenticate user."
+      redirect '/login'
+    end
   end
 end

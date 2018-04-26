@@ -7,11 +7,15 @@ class User < Model
 
   def initialize(params = nil)
     @username = params[0]
-    @password = params[1]
+    @password ||= BCrypt::Password.new(params[1])
     @role = params[2]
   end
 
   def self.modify_params(params)
     params['password'] = BCrypt::Password.create(params['password'])
+  end
+
+  def authenticate(in_password)
+    return @password == in_password
   end
 end
