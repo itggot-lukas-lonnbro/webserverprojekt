@@ -6,15 +6,12 @@ class User < Model
   column_property 'role', Integer, default: 0
 
   def initialize(params = nil)
-    @password = params[1]
     @username = params[0]
+    @password = params[1]
     @role = params[2]
   end
 
-  def self.get_by(column, query)
-    user = super(column, query)
-    if user
-      puts
-    end
+  def self.modify_params(params)
+    params['password'] = BCrypt::Password.create(params['password'])
   end
 end

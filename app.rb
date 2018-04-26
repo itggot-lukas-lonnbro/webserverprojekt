@@ -1,8 +1,8 @@
 class App < Sinatra::Base
   enable :session
+  register Sinatra::Flash
 
   get '/' do
-    p User.get_by_role("lukas")
     slim :home
   end
 
@@ -11,8 +11,13 @@ class App < Sinatra::Base
   end
 
   post '/register' do
-    User.add(params)
-    redirect '/'
+    error = User.add(params)
+    if error
+      puts "error: #{error}"
+      redirect '/register'
+    else
+      redirect '/'
+    end
   end
 
   get '/login' do

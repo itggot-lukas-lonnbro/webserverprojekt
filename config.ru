@@ -1,6 +1,9 @@
 #Use bundler to load gems
 require 'bundler'
 require 'pp'
+require 'sinatra'
+require 'sinatra/flash'
+require 'bcrypt'
 
 #Load gems
 Bundler.require

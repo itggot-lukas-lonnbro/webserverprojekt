@@ -10,11 +10,9 @@ class Model
     @properties ||= Hash.new()
     @property ||= Struct.new(:column_name, :column_type, :unique, :default)
   end
-
   def self.column_property(column_name, column_type, unique: false, default: nil)
     @properties[column_name] = @property.new(column_name, column_type, unique, default)
   end
-
   def self.put_properties
     pp @properties
   end
@@ -45,23 +43,31 @@ class Model
 
 
 
-  def validate_properties(in_params)
+  def self.add(params)
+    in_params = params.dup
+
+    #in_params = Model.validate_properties(in_params)
+
     @properties.keys.each do |key|
       if(!in_params[key])
         if(@properties[key].default)
           in_params[key] = @properties[key].default
         else
-          puts "Raised error: Error parsing properties"
+          return "Raised error: Error parsing properties"
         end
       end
     end
 
-    return in_params
-  end
-  def self.add(params)
-    in_params = params.dup
-
-    in_params = Model.validate_properties(in_params)
+    #Check uniques.
+    @properties.keys.each do |key|
+      if(@properties[key].unique)
+        unique_check = @@db.execute("select 1 from #{@table} where #{key.to_s} IS '#{in_params[key]}'")
+        puts "unique_check #{unique_check.inspect}"
+        if(unique_check[0])
+          return "Raised error: Property has to be unique."
+        end
+      end
+    end
 
     place_holders = ""
     in_params.values.each do |_|
@@ -71,29 +77,31 @@ class Model
       place_holders[-1] = ""
     end
 
+    self.modify_params(in_params)
+
     @@db.execute("INSERT INTO #{@table} VALUES (#{place_holders})", in_params.values)
-  end
-
-
-  def self.method_missing(method, *args)
-    token = ""
-    column = ""
-    getby = false
-    method.to_s.each_char do |char|
-      if getby
-        column += char
-      else
-        token += char
-
-        if token == "get_by_"
-          getby = true
-          token = ""
-        end
-      end
-    end
-
-    if getby
-      self.get_by(column, args[0])
-    end
+    return false
   end
 end
+
+  # def self.method_missing(method, *args)
+  #   token = ""
+  #   column = ""
+  #   getby = false
+  #   method.to_s.each_char do |char|
+  #     if getby
+  #       column += char
+  #     else
+  #       token += char
+  #
+  #       if token == "get_by_"
+  #         getby = true
+  #         token = ""
+  #       end
+  #     end
+  #   end
+  #
+  #   if getby
+  #     self.get_by(column, args[0])
+  #   end
+  # end
