@@ -1,7 +1,7 @@
 class User < Model
-  #Has to be declared in the order of columns appearing in
+  #Has to be declared in the order which columns appear
   table 'Users'
-  column_property 'username', String, unique: true
+  column_property 'username', String, unique: true #UniqueConstraint class for platform independency.
   column_property 'password', String
   column_property 'role', Integer, default: 0
 

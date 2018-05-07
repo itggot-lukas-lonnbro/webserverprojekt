@@ -1,5 +1,4 @@
 class Model
-  @@db_info = Hash.new()
   @@db =  SQLite3::Database.new('db/db.sqlite')
 
   def self.table_name
@@ -36,7 +35,7 @@ class Model
     if(!@properties[column])
       return "Failed to parse query"
     else
-      db_result = @@db.execute("SELECT * FROM #{@table} WHERE #{column} LIKE ?", query) #Loop through in order to get all values in the correct order. 
+      db_result = @@db.execute("SELECT * FROM #{@table} WHERE #{column} LIKE ?", query) #Loop through in order to get all values in the correct order.
       return self.new(db_result[0])
     end
   end

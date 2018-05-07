@@ -6,7 +6,9 @@ html
     link href="./css/master.css" rel="stylesheet"
   body
     a href="/" home
+    - if @user
+      form action="/sessions" method="post"
+        input type="hidden" name="_method" value="DELETE"
+        button type="submit" logout
     h1.layout_test YOOOOO SOLVE SM SUDOKUS
-    main
-      canvas id="main_canvas"
     == yield
