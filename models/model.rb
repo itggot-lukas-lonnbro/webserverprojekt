@@ -19,7 +19,8 @@ class Model
 
 
 
-  def self.get_all()
+  def self.get_all(query)
+
     db_result = @@db.execute("SELECT * FROM #{@table}")
 
     temp_list_of_users = []
@@ -31,12 +32,11 @@ class Model
   end
 
 
-
   def self.get_by(column, query)
     if(!@properties[column])
       return "Failed to parse query"
     else
-      db_result = @@db.execute("SELECT * FROM #{@table} WHERE #{column} LIKE ?", query)
+      db_result = @@db.execute("SELECT * FROM #{@table} WHERE #{column} LIKE ?", query) #Loop through in order to get all values in the correct order. 
       return self.new(db_result[0])
     end
   end
@@ -83,6 +83,10 @@ class Model
     return false
   end
 end
+
+
+
+
 
   # def self.method_missing(method, *args)
   #   token = ""

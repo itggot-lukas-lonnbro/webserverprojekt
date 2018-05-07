@@ -34,4 +34,8 @@ class App < Sinatra::Base
       redirect '/login'
     end
   end
+
+  get '/sodukusolver' do
+    slim :sodukusolver
+  end
 end

@@ -5,3 +5,9 @@ body {
 .layout_test {
   color: green;
 }
+
+main {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
